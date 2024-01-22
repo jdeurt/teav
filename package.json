@@ -1,0 +1,36 @@
+{
+    "name": "teav",
+    "version": "1.0.0",
+    "description": "Typescript errors as values",
+    "main": "dist/index.js",
+    "scripts": {
+        "test": "ava"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+ssh://git@github.com/jdeurt/teav.git"
+    },
+    "author": "Juan de Urtubey",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/jdeurt/teav/issues"
+    },
+    "homepage": "https://github.com/jdeurt/teav#readme",
+    "devDependencies": {
+        "@ava/typescript": "^4.1.0",
+        "@fast-check/ava": "^1.2.1",
+        "ava": "^6.1.0",
+        "typescript": "^5.3.3"
+    },
+    "ava": {
+        "files": [
+            "src/**/*.spec.*"
+        ],
+        "typescript": {
+            "rewritePaths": {
+                "src/": "dist/"
+            },
+            "compile": "tsc"
+        }
+    }
+}
