@@ -12,8 +12,7 @@ npm i teav --save
 
 ## Documentation
 
-Currently, there is no dedicated documentation page.
-You can consult the JSDoc attached to every method exposed by this library for now.
+Documentation is available at https://jdeurt.github.io/teav.
 
 ## Usage
 
