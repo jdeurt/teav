@@ -4,7 +4,8 @@
     "description": "Typescript errors as values",
     "main": "dist/index.js",
     "scripts": {
-        "test": "ava"
+        "test": "ava",
+        "prepublishOnly": "tsc"
     },
     "repository": {
         "type": "git",

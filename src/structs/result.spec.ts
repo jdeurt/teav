@@ -20,8 +20,8 @@ testProp("mapErr", [fc.anything()], (t, v) => {
     const ok = Result.Ok(v);
     const err = Result.Err(e);
 
-    const okMapResult = ok.mapErr((v) => [v]);
-    const errMapResult = err.mapErr((v) => [v]);
+    const okMapResult = ok.mapErr((v) => new Error(v));
+    const errMapResult = err.mapErr((v) => new Error(v.message));
 
     t.is(okMapResult.isOk(), true);
     t.is(errMapResult.isOk(), false);
@@ -30,6 +30,6 @@ testProp("mapErr", [fc.anything()], (t, v) => {
         errMapResult.unwrap();
         t.fail();
     } catch (error) {
-        t.is((error as Error[])[0], e);
+        t.is((error as Error).message, e.message);
     }
 });

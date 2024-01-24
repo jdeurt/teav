@@ -2,7 +2,7 @@
 
 > Typescript errors as values
 
-This library takes heavy inspiration from Rust's `Option` and `Result` types.
+This library takes heavy inspiration from Rust's `Either`, `Option`, and `Result` types.
 
 ## Installation
 
@@ -51,7 +51,7 @@ import { Result } from "teav";
 import { myIoOperationSync } from "./my/io/utils";
 
 // `result` will be `Err` if `myIoOperation` throws an error.
-const result = Result.from(() => myIoOperationSync());
+const result = Result.unsafeFrom(() => myIoOperationSync());
 
 // `mapOrElse` is just one of the many ways of handling `Result` objects.
 const data = result.mapOrElse(
@@ -64,13 +64,26 @@ const data = result.mapOrElse(
 );
 ```
 
+You can also be more explicit about what errors are expected for an additional layer of safety.
+
+```ts
+import { Result } from "teav";
+import { myIoOperationSync, IoError } from "./my/io/utils";
+
+// If `myIoOperationSync` throws an error that is not an instance of IoError,
+// that error will be rethrown.
+const result = Result.from([IoError], () => myIoOperationSync());
+
+// ...
+```
+
 It also works with async functions.
 
 ```ts
 import { Result } from "teav";
 import { myIoOperation } from "./my/io/utils";
 
-const result = await Result.fromAsync(() => myIoOperation());
+const result = await Result.unsafeFromAsync(() => myIoOperation());
 
 const data = result.mapOrElse(
     (error) => {
